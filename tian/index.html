@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Foryou</title>
+</head>
+<style>
+    *{ 
+        margin: 0;
+        padding: 0;
+    }
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+    body{
+        overflow:hidden;
+        background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+    }
+    .box{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transform:rotateX(-20deg) rotateY(0deg);
+        position:absolute;
+        top:0;
+        left:0px;
+        z-index:1;
+    }
+    .box img{
+        width: 300px;
+        height: 200px;
+        position: absolute;
+        left: calc(50% - 150px);
+        top: calc(50% - 100px);
+        border: 5px solid #ffffff;
+        user-select: none;
+        -webkit-box-reflect:below 10px -webkit-linear-gradient(top,rgba(0,0,0,0) 50%,rgba(0,0,0,0.5) 100%);
+        cursor: pointer;
+    }
+    #wrap p{
+        width: 1200px;
+        height: 1200px;
+        background:-webkit-radial-gradient(center center,600px 600px,rgba(244,23,234,0.2),rgba(0,0,0,0));
+        position: absolute;
+        top:100%;left:50%;
+        margin-top: -600px;
+        margin-left: -600px;
+        border-radius:600px;
+        transform:rotateX(90deg);
+    }
+    @-webkit-keyframes star-opacity {
+        0% {
+            opacity: 0
+        }
+        40% {
+            opacity: 1
+        }
+        60% {
+            opacity: 1
+        }
+        100% {
+            opacity: 0
+        }
+    }
+    @keyframes star-opacity {
+        0% {
+            opacity: 0
+        }
+        40% {
+            opacity: 1
+        }
+        60% {
+            opacity: 1
+        }
+        100% {
+            opacity: 0
+        }
+    }
+    @-webkit-keyframes star-pos {
+        0% {
+            transform: scale(0) rotate(0) translate3d(0, 0, 0);
+            -webkit-transform: scale(0) rotate(0) translate3d(0, 0, 0);
+            -moz-transform: scale(0) rotate(0) translate3d(0, 0, 0)
+        }
+        100% {
+            transform: scale(1) rotate(0) translate3d(-450px, 450px, 0);
+            -webkit-transform: scale(1) rotate(0) translate3d(-450px, 450px, 0);
+            -moz-transform: scale(1) rotate(0) translate3d(-450px, 450px, 0)
+        }
+    }
+    @keyframes star-pos {
+        0% {
+            transform: scale(0) rotate(0) translate3d(0, 0, 0);
+            -webkit-transform: scale(0) rotate(0) translate3d(0, 0, 0);
+            -moz-transform: scale(0) rotate(0) translate3d(0, 0, 0)
+        }
+        100% {
+            transform: scale(1) rotate(0) translate3d(-450px, 450px, 0);
+            -webkit-transform: scale(1) rotate(0) translate3d(-450px, 450px, 0);
+            -moz-transform: scale(1) rotate(0) translate3d(-450px, 450px, 0)
+        }
+    }
+    body {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+    }
+    .stars {
+        height: 0
+    }
+    .star {
+        display: block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #fff;
+        top:0px;
+        left:0px;
+        position:absolute;
+        -webkit-transform-origin: 100% 0;
+        transform-origin: 100% 0;
+        -webkit-animation: star-opacity 5s infinite ease-in, star-pos 5s infinite ease-in;
+        animation: star-opacity 5s infinite ease-in, star-pos 5s infinite ease-in;
+        -webkit-box-shadow: 0 0 5px 5px rgba(255, 255, 255, .3);
+        box-shadow: 0 0 5px 5px rgba(255, 255, 255, .3);
+        opacity: 0;
+        z-index:2;
+    }
+    .star:after {
+        content: '';
+        display: block;
+        top: 0;
+        left: 4px;
+        border: 0 solid #fff;
+        border-width: 0 90px 2px;
+        border-color: transparent transparent transparent rgba(255, 255, 255, .3);
+        -webkit-transform: rotate(-45deg) translate3d(1px, 3px, 0);
+        transform: rotate(-45deg) translate3d(1px, 3px, 0);
+        -webkit-box-shadow: 0 0 1px 0 rgba(255, 255, 255, .1);
+        box-shadow: 0 0 1px 0 rgba(255, 255, 255, .1);
+        -webkit-transform-origin: 0% 100%;
+        transform-origin: 0% 100%
+    }
+    #sea{
+        width:100%;
+        height:100%;
+        position:relative;
+        z-index:-1;
+        overflow:hidden;
+    }
+    #clickme{
+        width:120px;
+        height:120px;
+        position:absolute;
+        left:50%;
+        top:12%;
+        background:#C10003;
+        border-radius:3px;transform:rotate(45deg);
+        display:none;
+    }
+    #clickme:before{content:'';position:absolute;width:120px;height:120px;background-color:#C10003;border-radius:50%;top:0px;left:-68px;}
+    #clickme:after{position:absolute;width:120px;height:120px;content:'';background-color:#C10003;border-radius:50%;left:0px;top:-68px;}
+    #text{
+        font-size:36px;
+        background：blue;
+        position:absolute;
+        top:12%;
+        left:48%;
+        display:none;
+        z-index:3;
+    }
+    #text p{
+        color:black;
+        font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+    }
+    #zhengjia{
+        position:absolute;
+        width:160px;
+        height:160px;
+        z-index:100;
+        top:10%;
+        left:48%;
+    }
+    #text1{
+        margin:0 auto;
+        width:100%;
+        height:150px;
+        position:absolute;
+        top:185px;
+        line-height:150px;
+        text-align:center;
+        font-size:60px;
+        text-align:center;
+        font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+        color:blue;
+    }
+</style>
+<body>
+<div id="text1">
+</div>
+<div id="zhengjia">
+</div>
+<div id="sea">
+  <div id="text">
+        <p>click  me !</p>
+    </div>
+
+    <div id="clickme">
+        <span></span>
+    </div>
+
+    <div class="star"></div>
+    <div class="star" style="top: 100px; left: 800px; animation-delay: 3s;"></div>
+    <div class="star" style="top: 150px; left: 900px; animation-delay: 2s;"></div>
+    <div class="star" style="top: 300px; left:1000px; animation-delay: 4s;"></div>
+    <div class="star" style="top: 80px; left: 1100px; animation-delay: 1s;"></div>
+    <div class="star" style="top:180px; left: 1200px; animation-delay: 2s;"></div>
+    <div class="star" style="top: 124px; left:1300px; animation-delay: 1s;"></div>
+
+
+    <div class="star"></div>
+    <div class="star" style="top: 100px; left: 800px; animation-delay: 3s;"></div>
+    <div class="star" style="top: 150px; left: 900px; animation-delay: 4s;"></div>
+    <div class="star" style="top: 300px; left:1000px; animation-delay: 2s;"></div>
+    <div class="star" style="top: 80px; left: 1100px; animation-delay: 3s;"></div>
+    <div class="star" style="top:180px; left: 1200px; animation-delay: 4s;"></div>
+    <div class="star" style="top: 124px; left:1300px; animation-delay: 2s;"></div>
+
+
+    <div class="box" id="wrap" >
+        <img src="..\tian\imgs\01.jpg" />
+        <img src="..\tian\imgs\02.jpg" />
+        <img src="..\tian\imgs\03.jpg" />
+        <img src="..\tian\imgs\04.jpg" />
+        <img src="..\tian\imgs\05.jpg" />
+        <img src="..\tian\imgs\06.jpg" />
+    </div>
+
+
+
+    <div class="box1">
+        <embed src="http://mp32.9ku.com/upload/128/2017/07/05/862755.mp3";hidden="false";autostart="true"; loop="true" hidden="true" />
+    </div>
+
+</div>
+</body>
+
+<script>
+    setTimeout(init,100);
+    var arrUrl=['','你还未来,我怎敢老去','往后余生,全都是你','天青色等烟雨，而我在等你','春风十里不如你','曾经沧海难为水，除却巫山不是云'];
+    function init(){
+        var imgArray = document.getElementsByTagName('img');
+        var text = document.getElementById('text');
+        var clickme=document.getElementById('clickme');
+        var zhengjia=document.getElementById('zhengjia');
+        var text1=document.getElementById("text1");
+        var length = 5 - 0;
+        var suijishu = parseInt(Math.random() * (length) + 1);
+        console.log(suijishu);
+		var str=arrUrl[suijishu];
+		console.log(str);
+		var len=str.length;
+        var i=1;
+		    
+			
+			
+        zhengjia.onclick=function(){
+            clickme.style.display='none';
+            text.style.display='none';
+					var funname=function(){
+         text1.innerHTML=str.substr(0,i);
+         i++;
+         if(i>len){
+         clearInterval("done");
+           }
+         }
+		 
+		 var done=setInterval(funname,500);
+ 
+        };
+        setTimeout(function(){
+            clickme.style.display='block';
+            text.style.display='block';
+        },7500);
+        var deg = 360/imgArray.length;//单位度数
+        [].forEach.call(imgArray,function(node,index){
+            // console.log(index*deg);//每张图片应该旋转的度数
+            node.style.transform = "rotateY("+index*deg+"deg)translatez(350px)";//赋予给图片，并撑开350px
+            node.style.transition = "1s "+(imgArray.length - index)*0.11+"s";
+        });
+        var newX,newY,pervX,pervY,minusX,minusY;
+        var roY = 0 , roX = -10;
+        var oWrap = document.getElementById("wrap");//通过id获取元素
+        var timer;
+        // 拖拽：三个事件-按下 移动 抬起
+        //按下
+        document.onmousedown = function(ev){
+            ev = ev || window.event;
+            //鼠标按下的时候，给前一点坐标赋值，为了避免第一次相减的时候出错
+            lastX = ev.clientX;
+            lastY = ev.clientY;
+            //抬起
+            this.onmouseup = function(){
+                this.onmousemove = null;
+                timer = setInterval(function(){
+                    if ( Math.abs(minusX)<0.1 && Math.abs( minusY )<0.1 )
+                    {
+                        clearInterval( timer );
+                    }
+                },13);
+            }
+            return false;
+        }
+    };
+    var num=0;
+    function mode() {
+        var aaa;
+        aaa =num+1;
+        num=aaa;
+        var roY =aaa;  roX = -10;
+        var oWrap = document.getElementById("wrap");//通过id获取元素
+        oWrap.style.transform = 'rotateX('+ roX +'deg) rotateY('+ roY +'deg)';
+    };
+    setInterval(mode, 1000);
+</script>
+
+</html>
